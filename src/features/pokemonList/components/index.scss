@@ -5,7 +5,6 @@
 
   display: flex;
   flex-wrap: wrap;
-  // gap: 1rem;
   gap: var(--gap);
   list-style-type: none;
   margin-bottom: 2rem;
@@ -15,10 +14,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
   border: 1px solid white;
   flex-basis: calc(100% - var(--gap));
+  aspect-ratio: 1 / 1;
+  transition: border 0.25s ease-in-out;
+  cursor: pointer;
 
   @media (min-width: $sm) {
     flex-basis: calc(33% - var(--gap));
@@ -30,5 +33,17 @@
 
   @media (min-width: $lg) {
     flex-basis: calc(20% - var(--gap));
+  }
+
+  &:hover {
+    border: 1px solid $accent-main;
+  }
+
+  &__image {
+    width: 70%;
+  }
+
+  &__name {
+    font-size: 2rem;
   }
 }

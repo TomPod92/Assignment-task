@@ -20,14 +20,9 @@ export const fetchPokemonList = createAsyncThunk('pokemonList/fetchPokemonList',
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
     toast.success('Pokemons fetched');
     return response.data.results.map((pokemon: PokemonListItem) => {
-      const pokemonIdStringArray = pokemon.url.substring(0, pokemon.url.length - 1).split('/');
-
-      const pokemonId = pokemonIdStringArray[pokemonIdStringArray.length - 1];
       return {
         ...pokemon,
-        id: pokemonId,
-        // id: pokemon.url.match(/(?:pokemon\/)(\d+)(?:\/)$/),
-        // id: pokemon.url.match(/\/([0-9]+)\/$/),
+        id: pokemon.url.match(/(?:pokemon\/)(?<id>\d+)(?:\/)$/)?.groups?.id,
       };
     });
   } catch (err) {

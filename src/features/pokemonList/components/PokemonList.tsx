@@ -4,7 +4,6 @@ import Pokemon from 'src/features/pokemonList/components/Pokemon';
 import { clearPokemonList, fetchPokemonList } from 'src/features/pokemonList/reducer/pokemonReducer';
 import './index.scss';
 import PaginationButtons from 'src/common/components/PaginationButtons/PaginationButtons';
-import { PokemonListSkeleton } from 'src/features/pokemonList/components/PokemonListSkeleton';
 
 const skeletonArray = Array.from(Array(10));
 
@@ -27,7 +26,7 @@ const PokemonList = () => {
       dispatch(clearPokemonList());
     };
   }, [dispatch]);
-  console.log('pokemonsToDisplay', pokemonsToDisplay);
+
   return (
     <>
       <ul className="pokemon-list">
