@@ -1,0 +1,9 @@
+.pokemon-details {
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    width: 90%;
+    max-width: 400px;
+  }
+}

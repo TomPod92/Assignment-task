@@ -1,3 +1,4 @@
+import PokemonDetails from 'src/features/pokemonDetails/components/PokemonDetails';
 import PokemonList from 'src/features/pokemonList/components/PokemonList';
 
 export type NavigationItem = {
@@ -12,6 +13,6 @@ export const navigationConfig: NavigationItem[] = [
   },
   {
     path: '/pokemon-details/:pokemonId',
-    element: <div>Details</div>,
+    element: <PokemonDetails />,
   },
 ];
