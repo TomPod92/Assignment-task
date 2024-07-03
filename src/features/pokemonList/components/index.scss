@@ -1,11 +1,34 @@
+@import '../../../common/styles/index.scss';
+
 .pokemon-list {
+  --gap: 1rem;
+
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  // gap: 1rem;
+  gap: var(--gap);
   list-style-type: none;
+  margin-bottom: 2rem;
 }
 
 .pokemon-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
   border: 1px solid white;
+  flex-basis: calc(100% - var(--gap));
+
+  @media (min-width: $sm) {
+    flex-basis: calc(33% - var(--gap));
+  }
+
+  @media (min-width: $md) {
+    flex-basis: calc(25% - var(--gap));
+  }
+
+  @media (min-width: $lg) {
+    flex-basis: calc(20% - var(--gap));
+  }
 }

@@ -4,6 +4,9 @@ import Pokemon from 'src/features/pokemonList/components/Pokemon';
 import { clearPokemonList, fetchPokemonList } from 'src/features/pokemonList/reducer/pokemonReducer';
 import './index.scss';
 import PaginationButtons from 'src/common/components/PaginationButtons/PaginationButtons';
+import { PokemonListSkeleton } from 'src/features/pokemonList/components/PokemonListSkeleton';
+
+const skeletonArray = Array.from(Array(10));
 
 const PokemonList = () => {
   const { pokemons, isLoading, error } = useAppSelector((state) => state.pokemonList);
@@ -16,8 +19,6 @@ const PokemonList = () => {
     goToPreviousPage,
     goToNextPage,
   } = usePagination({ items: pokemons, resultsPerPage: 20 });
-  console.log('pokemons', pokemons);
-  console.log('pokemonsToDisplay', pokemonsToDisplay);
 
   useEffect(() => {
     dispatch(fetchPokemonList());
@@ -26,20 +27,22 @@ const PokemonList = () => {
       dispatch(clearPokemonList());
     };
   }, [dispatch]);
-
+  console.log('pokemonsToDisplay', pokemonsToDisplay);
   return (
     <>
       <ul className="pokemon-list">
-        {pokemonsToDisplay.map((pokemon) => (
-          <Pokemon key={pokemon.name} pokemon={pokemon} />
+        {(isLoading ? skeletonArray : pokemonsToDisplay).map((pokemon) => (
+          <Pokemon key={pokemon.name} pokemon={pokemon} isLoading={isLoading} />
         ))}
       </ul>
-      <PaginationButtons
-        prevDisabled={previousButtonDisabled}
-        nextDisabled={nextButtonDisabled}
-        onPrevClick={goToPreviousPage}
-        onNextClick={goToNextPage}
-      />
+      {!isLoading && (
+        <PaginationButtons
+          prevDisabled={previousButtonDisabled}
+          nextDisabled={nextButtonDisabled}
+          onPrevClick={goToPreviousPage}
+          onNextClick={goToNextPage}
+        />
+      )}
     </>
   );
 };
