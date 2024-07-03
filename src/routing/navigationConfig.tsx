@@ -1,3 +1,5 @@
+import PokemonList from 'src/features/pokemonList/components/PokemonList';
+
 export type NavigationItem = {
   path: string;
   element: JSX.Element;
@@ -6,7 +8,7 @@ export type NavigationItem = {
 export const navigationConfig: NavigationItem[] = [
   {
     path: '/',
-    element: <div>List</div>,
+    element: <PokemonList />,
   },
   {
     path: '/pokemon-details/:pokemonId',

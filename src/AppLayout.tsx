@@ -1,6 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import AppRouter from 'src/routing/AppRouter';
 import AppHeader from 'src/common/components/AppHeader/AppHeader';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppLayout = () => {
   return (
