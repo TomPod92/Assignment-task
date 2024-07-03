@@ -10,6 +10,7 @@ export type Pokemon = {
   height: number;
   weight: number;
   hp: number;
+  attack: number;
   defence: number;
   types: string[];
 };

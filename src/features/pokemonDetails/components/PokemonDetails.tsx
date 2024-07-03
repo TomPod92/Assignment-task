@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'src/common/hooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { clearPokemonDetails, fetchPokemonDetails } from 'src/features/pokemonDetails/reducer/pokemonDetailsReducer';
 import { toast } from 'react-toastify';
 import './pokemonDetails.scss';
 import Image from 'src/common/components/Image/Image';
+import PokemonAttribute from 'src/features/pokemonDetails/components/PokemonAttribute';
+import PokemonDetailsSkeleton from 'src/features/pokemonDetails/components/PokemonDetailsSkeleton';
 
 const PokemonDetails = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const params = useParams();
 
   const { pokemonDetails, isLoading, error } = useAppSelector((state) => state.pokemonDetails);
@@ -35,6 +36,10 @@ const PokemonDetails = () => {
     navigate('/error-page', { state: { errorMessage: 'Could not fetch pokemon data' } });
   }, [error, navigate]);
 
+  if (isLoading) {
+    return <PokemonDetailsSkeleton />;
+  }
+
   return (
     <div className="pokemon-details">
       <Image
@@ -43,7 +48,13 @@ const PokemonDetails = () => {
         className="pokemon-details__image"
       />
       <div className="pokemon-details__info">
-        <p>{pokemonDetails?.name}</p>
+        <p className="pokemon-name">{pokemonDetails?.name}</p>
+        <PokemonAttribute name="Types" value={pokemonDetails?.types.join(', ')} />
+        <PokemonAttribute name="Height" value={pokemonDetails?.height} />
+        <PokemonAttribute name="Weight" value={pokemonDetails?.weight} />
+        <PokemonAttribute name="HP" value={pokemonDetails?.hp} />
+        <PokemonAttribute name="Attack" value={pokemonDetails?.attack} />
+        <PokemonAttribute name="Defence" value={pokemonDetails?.defence} />
       </div>
     </div>
   );

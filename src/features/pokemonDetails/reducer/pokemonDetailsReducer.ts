@@ -20,18 +20,20 @@ export const fetchPokemonDetails = createAsyncThunk(
   async (pokemonId: string, { rejectWithValue }) => {
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-      toast.success('Pokemons fetched', { toastId: 'pokemonDetailsSuccess' });
+      toast.success('Pokemon details fetched', { toastId: 'pokemonDetailsSuccess' });
+
       const pokemon = response.data;
       const pokemonData: Pokemon = {
         id: pokemon.id,
         name: pokemon.name,
+        types: pokemon.types.map((type: ApiPokemonType) => type.type.name),
         height: pokemon.height,
         weight: pokemon.weight,
         hp: pokemon.stats.find((stat: ApiPokemonStat) => stat.stat.name === 'hp').base_stat,
+        attack: pokemon.stats.find((stat: ApiPokemonStat) => stat.stat.name === 'attack').base_stat,
         defence: pokemon.stats.find((stat: ApiPokemonStat) => stat.stat.name === 'defense').base_stat,
-        types: pokemon.types.map((type: ApiPokemonType) => type.type.name),
       };
-      console.log('->', pokemonData);
+
       return pokemonData;
     } catch (err) {
       const error = err as AxiosError;
