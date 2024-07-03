@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SkeletonElement from 'src/common/components/SkeletonElement/SkeletonElement';
 import { PokemonListItem } from 'src/common/types';
 

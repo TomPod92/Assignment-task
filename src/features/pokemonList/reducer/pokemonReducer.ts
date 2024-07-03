@@ -3,14 +3,14 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { PokemonListItem } from 'src/common/types';
 
-type InitialState = {
-  loading: boolean;
+type PokemonListState = {
+  isLoading: boolean;
   pokemons: PokemonListItem[];
   error: string;
 };
 
-const initialState: InitialState = {
-  loading: false,
+const initialState: PokemonListState = {
+  isLoading: false,
   pokemons: [],
   error: '',
 };
@@ -18,7 +18,7 @@ const initialState: InitialState = {
 export const fetchPokemonList = createAsyncThunk('pokemonList/fetchPokemonList', async (_data, { rejectWithValue }) => {
   try {
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
-    toast.success('Pokemons fetched');
+    toast.success('Pokemons fetched', { toastId: 'pokemonListSuccess' });
     return response.data.results.map((pokemon: PokemonListItem) => {
       return {
         ...pokemon,
@@ -27,7 +27,7 @@ export const fetchPokemonList = createAsyncThunk('pokemonList/fetchPokemonList',
     });
   } catch (err) {
     const error = err as AxiosError;
-    toast.error('Error while fetching pokemons');
+    toast.error('Error while fetching pokemons', { toastId: 'pokemonListError' });
     return rejectWithValue(error.message);
   }
 });
@@ -40,16 +40,16 @@ const pokemonListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPokemonList.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(fetchPokemonList.fulfilled, (state, action: PayloadAction<PokemonListItem[]>) => {
-      state.loading = false;
+      state.isLoading = false;
       state.pokemons = action.payload;
       state.error = '';
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     builder.addCase(fetchPokemonList.rejected, (state, action: any) => {
-      state.loading = false;
+      state.isLoading = false;
       state.pokemons = [];
       state.error = action.payload;
     });

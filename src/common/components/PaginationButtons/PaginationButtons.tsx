@@ -1,3 +1,4 @@
+import Button from 'src/common/components/Button/Button';
 import './paginationButtons.scss';
 
 interface Props {
@@ -10,12 +11,8 @@ interface Props {
 const PaginationButtons = ({ prevDisabled, nextDisabled, onPrevClick, onNextClick }: Props) => {
   return (
     <div className="pagination-buttons">
-      <button disabled={prevDisabled} onClick={onPrevClick}>
-        Prev
-      </button>
-      <button disabled={nextDisabled} onClick={onNextClick}>
-        Next
-      </button>
+      <Button text="Prev" disabled={prevDisabled} onClick={onPrevClick} />
+      <Button text="Next" disabled={nextDisabled} onClick={onNextClick} />
     </div>
   );
 };

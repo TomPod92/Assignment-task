@@ -1,0 +1,21 @@
+@import '../../../common/styles/index.scss';
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - $header-height - 2 * $main-padding);
+
+  &__image {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  &__message {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
