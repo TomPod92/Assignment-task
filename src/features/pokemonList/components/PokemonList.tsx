@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch, usePagination } from 'src/common/hooks';
 import Pokemon from 'src/features/pokemonList/components/Pokemon';
-import { clearPokemonList, fetchPokemonList } from 'src/features/pokemonList/reducer/pokemonReducer';
+import { clearPokemonList, fetchPokemonList } from 'src/features/pokemonList/reducer/pokemonListReducer';
 import './index.scss';
 import PaginationButtons from 'src/common/components/PaginationButtons/PaginationButtons';
 import { useNavigate } from 'react-router-dom';
