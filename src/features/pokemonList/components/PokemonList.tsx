@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch, usePagination } from 'src/common/hooks'
 import Pokemon from 'src/features/pokemonList/components/Pokemon';
 import { clearPokemonList, fetchPokemonList } from 'src/features/pokemonList/reducer/pokemonReducer';
 import './index.scss';
+import PaginationButtons from 'src/common/components/PaginationButtons/PaginationButtons';
 
 const PokemonList = () => {
   const { pokemons, isLoading, error } = useAppSelector((state) => state.pokemonList);
@@ -27,11 +28,19 @@ const PokemonList = () => {
   }, [dispatch]);
 
   return (
-    <ul className="pokemon-list">
-      {pokemonsToDisplay.map((pokemon) => (
-        <Pokemon key={pokemon.name} pokemon={pokemon} />
-      ))}
-    </ul>
+    <>
+      <ul className="pokemon-list">
+        {pokemonsToDisplay.map((pokemon) => (
+          <Pokemon key={pokemon.name} pokemon={pokemon} />
+        ))}
+      </ul>
+      <PaginationButtons
+        prevDisabled={previousButtonDisabled}
+        nextDisabled={nextButtonDisabled}
+        onPrevClick={goToPreviousPage}
+        onNextClick={goToNextPage}
+      />
+    </>
   );
 };
 
