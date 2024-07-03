@@ -11,7 +11,13 @@ const Image = ({ imageName = '', fallbackImageName, className }: Props) => {
   const fallbackSrc = new URL(`../../../assets/${fallbackImageName}.png`, import.meta.url).href;
 
   return (
-    <img src={src} className={classNames('image', className)} onError={(e) => (e.currentTarget.src = fallbackSrc)} />
+    <img
+      src={src}
+      className={classNames('image', className)}
+      onError={(e) => {
+        e.currentTarget.src = fallbackSrc;
+      }}
+    />
   );
 };
 

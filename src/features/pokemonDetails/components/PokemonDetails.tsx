@@ -32,7 +32,7 @@ const PokemonDetails = () => {
     if (!error) {
       return;
     }
-    navigate('/error-page', { state: { goBack: true, errorMessage: 'Could not fetch pokemon data' } });
+    navigate('/error-page', { state: { errorMessage: 'Could not fetch pokemon data' } });
   }, [error, navigate]);
 
   if (isLoading) {
@@ -41,11 +41,7 @@ const PokemonDetails = () => {
 
   return (
     <div className="pokemon-details">
-      <Image
-        imageName={params.pokemonId || ''}
-        fallbackImageName="placeholder.png"
-        className="pokemon-details__image"
-      />
+      <Image imageName={params.pokemonId || ''} fallbackImageName="placeholder" className="pokemon-details__image" />
       <div className="pokemon-details__info">
         <p className="pokemon-name">{pokemonDetails?.name}</p>
         <PokemonAttribute name="Types" value={pokemonDetails?.types.join(', ')} />

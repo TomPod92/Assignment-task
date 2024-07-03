@@ -19,7 +19,7 @@ const Pokemon = ({ pokemon, isLoading }: Props) => {
 
   return (
     <li className="pokemon-list-item" onClick={handlePokemonClick}>
-      <Image imageName={pokemon?.id} className="pokemon-list-item__image" fallbackImageName="placeholder.png" />
+      <Image imageName={pokemon?.id} className="pokemon-list-item__image" fallbackImageName="placeholder" />
       <p className="pokemon-list-item__name">{pokemon?.name}</p>
     </li>
   );

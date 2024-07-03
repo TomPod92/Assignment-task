@@ -40,7 +40,6 @@ const PokemonList = () => {
   }, [error, navigate]);
 
   useEffect(() => {
-    console.log('invalidPageNumber', invalidPageNumber);
     if (!invalidPageNumber) {
       return;
     }

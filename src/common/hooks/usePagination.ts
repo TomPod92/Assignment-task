@@ -13,7 +13,9 @@ const usePagination = <T>({ items = [], resultsPerPage }: Props<T>) => {
   const previousButtonDisabled = page === 0;
   const nextButtonDisabled = items.length <= (page + 1) * resultsPerPage;
 
-  const invalidPageNumber = items.length ? Math.ceil(items.length / resultsPerPage) - 1 < page || page < 0 : false;
+  const invalidPageNumber = items.length
+    ? isNaN(page) || Math.ceil(items.length / resultsPerPage) - 1 < page || page < 0
+    : false;
 
   const goToPreviousPage = () => setSearchParams({ page: (page - 1).toString() });
   const goToNextPage = () => setSearchParams({ page: (page + 1).toString() });

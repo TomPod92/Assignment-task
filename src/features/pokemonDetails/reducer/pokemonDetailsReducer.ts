@@ -19,7 +19,10 @@ export const fetchPokemonDetails = createAsyncThunk(
   `pokemonDetails/fetchPokemonDetails`,
   async (pokemonId: string, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemonn/${pokemonId}`);
+      if (parseInt(pokemonId) > 151) {
+        throw new Error('Could not find pokemon');
+      }
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
 
       const pokemon = response.data;
       const pokemonData: Pokemon = {
