@@ -6,11 +6,5 @@
   "trailingComma": "all",
   "printWidth": 120,
   "endOfLine": "auto",
-  "importOrder": [
-    "^react(.*)$",
-    "<THIRD_PARTY_MODULES>",
-    "^common/(.*)$",
-    "^features/(.*)$",
-    "^[./]"
-  ]
+  "importOrder": ["^react(.*)$", "<THIRD_PARTY_MODULES>", "^common/(.*)$", "^features/(.*)$", "^[./]"]
 }

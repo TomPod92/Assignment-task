@@ -1,29 +1,28 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  items?: any[];
+interface Props<T> {
+  items?: T[];
   resultsPerPage: number;
 }
 
-const usePagination = ({ items = [], resultsPerPage }: Props) => {
-  const [page, setPage] = useState(0);
+const usePagination = <T>({ items = [], resultsPerPage }: Props<T>) => {
+  const [searchParams, setSearchParams] = useSearchParams({});
+  const page = parseInt(searchParams.get('page') || '0');
 
   const paginatedItems = items.slice(page * resultsPerPage, (page + 1) * resultsPerPage);
   const previousButtonDisabled = page === 0;
   const nextButtonDisabled = items.length <= (page + 1) * resultsPerPage;
 
-  const goToPreviousPage = () => setPage((prev) => prev - 1);
-  const goToNextPage = () => setPage((prev) => prev + 1);
+  const invalidPageNumber = items.length ? Math.ceil(items.length / resultsPerPage) - 1 < page || page < 0 : false;
 
-  // useEffect(() => {
-  //   setPage(0);
-  // }, [items]);
+  const goToPreviousPage = () => setSearchParams({ page: (page - 1).toString() });
+  const goToNextPage = () => setSearchParams({ page: (page + 1).toString() });
 
   return {
     paginatedItems,
     previousButtonDisabled,
     nextButtonDisabled,
+    invalidPageNumber,
     goToPreviousPage,
     goToNextPage,
   };

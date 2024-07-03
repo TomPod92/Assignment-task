@@ -19,8 +19,7 @@ export const fetchPokemonDetails = createAsyncThunk(
   `pokemonDetails/fetchPokemonDetails`,
   async (pokemonId: string, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-      toast.success('Pokemon details fetched', { toastId: 'pokemonDetailsSuccess' });
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemonn/${pokemonId}`);
 
       const pokemon = response.data;
       const pokemonData: Pokemon = {

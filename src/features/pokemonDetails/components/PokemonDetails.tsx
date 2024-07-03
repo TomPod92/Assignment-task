@@ -32,8 +32,7 @@ const PokemonDetails = () => {
     if (!error) {
       return;
     }
-
-    navigate('/error-page', { state: { errorMessage: 'Could not fetch pokemon data' } });
+    navigate('/error-page', { state: { goBack: true, errorMessage: 'Could not fetch pokemon data' } });
   }, [error, navigate]);
 
   if (isLoading) {

@@ -18,7 +18,7 @@ const initialState: PokemonListState = {
 export const fetchPokemonList = createAsyncThunk('pokemonList/fetchPokemonList', async (_data, { rejectWithValue }) => {
   try {
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
-    toast.success('Pokemons fetched', { toastId: 'pokemonListSuccess' });
+
     return response.data.results.map((pokemon: PokemonListItem) => {
       return {
         ...pokemon,

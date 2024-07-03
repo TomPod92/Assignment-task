@@ -18,6 +18,7 @@ const PokemonList = () => {
     paginatedItems: pokemonsToDisplay,
     previousButtonDisabled,
     nextButtonDisabled,
+    invalidPageNumber,
     goToPreviousPage,
     goToNextPage,
   } = usePagination({ items: pokemons, resultsPerPage: 20 });
@@ -37,6 +38,15 @@ const PokemonList = () => {
 
     navigate('/error-page', { state: { errorMessage: 'There was an error while fetching pokemon list' } });
   }, [error, navigate]);
+
+  useEffect(() => {
+    console.log('invalidPageNumber', invalidPageNumber);
+    if (!invalidPageNumber) {
+      return;
+    }
+
+    navigate('/error-page', { state: { errorMessage: 'Could not display requested pokemons' } });
+  }, [navigate, invalidPageNumber]);
 
   return (
     <>
